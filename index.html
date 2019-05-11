@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="jumbotron">
+        <h1 class="display-4">Matty was bad!</h1>
+        <p class="lead">Click on the button for a random punisment!</p>
+        <hr class="my-4">
+        <p id="punishment"></p>
+        <a class="btn btn-primary btn-lg" href="#" role="button" id="get-punishment">Punish!</a>
+        <input class="form-control" type="text" placeholder="Enter your name (optional)" id="user-name"
+            style="width: 250px; margin-top: 5px">
+    </div>
+    <div>
+        <button type="button" class="btn btn-outline-primary" id="log-button">	&#x21ba; Punishment Log</button>
+        <div id="log-table" style="margin-top: 5px">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+
+    <script>
+        var punishments = {
+            "1": "When padded must not conceal diapers except in public",
+            "2": "When padded must be leaking to change",
+            "3": "Resupplying, must buy a case of sissy diapers",
+            "4": "Must whimper or cry audibly when using diapers",
+            "5": "Must post photos of written diapers each change",
+            "6": "Feed your padding a large helping of oatmeal front and back once a week",
+            "7": "When padded must be doubled",
+            "8": "When padded cannot change yourself",
+            "9": "If at home before changing flood your diaper until it over flows, keep it on another 30 minutes",
+            "10": "Must be sucking on something (thumb/paci) at all feasible times",
+            "11": "When padded must be messy to change",
+            "12": "Must wear sissy attire except when in public",
+            "13": "Ride horse cock for one hour - no clit touching",
+            "14": "Reduction in big clothing, wear panties/undies under your diaper, when it's messy throw it away",
+            "15": "Must drink 20oz of liquid within an hour of bed; cannot leave bed for at least 6 hours for any reason",
+            "16": "When padded must have a daily enema",
+            "17": "Wear nightdress to sleep for a week.",
+            "18": "When padded must wear clothing that teases diapered state",
+            "19": "When padded can only change if it time/60 = int",
+            "20": "Plugged for 24 hours - Big's choice",
+            "21": "roll once, this is now permanent.",
+            "22": "Getting neutered - banding with hair tie for 30 minutes",
+            "23": "must publically (irc/twitter) announce diaper status every 3 hours",
+            "24": " must have visible diaper waistband poking out pants ",
+            "25": "No touching clit until vaginal orgasm. 30 minutes every day until orgasm.",
+            "26": "May only eat food from a bowl on the floor",
+            "27": "must sleep with hypnotic loop playing in background",
+            "28": "must watch 60 minutes of pre-school television or video",
+            "29": "Must have Magnesium Citrate before bed",
+            "30": "Boosted, purchase a diaper booster pad, you have to start using them too",
+            "31": "Must hump a plushie until you have climaxed three times, can't stop humping until you do.",
+            "32": "must receive verbal or written permission to change",
+            "33": "Can only paw off once for 1 minute or twice for 30 seconds each day for 1 week",
+            "34": " must orgasm in diapers before changing into new one",
+            "35": "must obey orders for anyone in sissy wear or diapers",
+            "36": "After messing yourself, mush the mess up against yourself or give yourself a wedgie before getting changed",
+            "37": "Letters, write an embarassing message on each diaper you wear, take a pic to show it off.",
+            "38": "Laxatives, every lunch time take a laxative",
+            "39": "Limited changes you can only change once a day",
+            "40": "Use suppositories",
+            "41": "Drink a glass of water every 60 minutes for the whole day",
+            "42": "Whilst at home you have to crawl, right until you get to the door",
+            "43": "Chat on chatroulette/omegal for 30 minutes with your diaper visible the entire time",
+            "44": "Plugs, wear a toy in your butt during the night, flip a coin for vibrating (H no, T yes)",
+            "45": "Pour oatmeal down the back of your diaper and sleep in it",
+            "46": "mess and wet outside while lifting your leg on a tree as if you are marking your territory",
+            "47": "bark loudly whenever you wet or mess your diaper until you've barked 5 times",
+            "48": "watch my little ponies. not the new one the old one. and sing and clap along to the show",
+            "49": "pacified, when not in public, suckle on a pacifier",
+            "50": "From now on, you aren't allowed to mess or wet in the house. That includes while you're asleep.",
+            "51": "Ask a bully cub for some new orders",
+            "52": "Chastity for 3 days",
+            "53": "Not allowed release until piggy takes a load of cum in his mouth or cunny",
+            "54": "Enema game - must hold for 40 minutes. If successful, use the potty and cum, if not lick mud",
+            "55": "Dolcolax suppository and walk about the park until messed",
+            "56": "Spanking (reps and implement to be decided by big)",
+            "57": "Chilled banana suppository. Must eat out of diaper after.",
+            "58": "Snout wallowing",
+            "59": "Wear cute shiny skirt, in public.",
+            "60": "When padded must paw off into any new diaper before changing"
+        }
+
+        var config = {
+            apiKey: "AIzaSyBMAit6mqm5Wcdb1P0UO14Njfptuk_vgho",
+            authDomain: "mattylog-5c326.firebaseapp.com",
+            databaseURL: "https://mattylog-5c326.firebaseio.com",
+            projectId: "mattylog-5c326",
+            storageBucket: "mattylog-5c326.appspot.com",
+            messagingSenderId: "560598744377",
+            appId: "1:560598744377:web:872a4456d44db7da"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(config);
+        var database = firebase.database();
+        firebase.database().ref().once('value').then(function (snapshot) {
+                logArr = (snapshot.val().Log);
+            });
+
+        $("#get-punishment").on("click", function (event) {
+            event.preventDefault();
+            var rand = Math.floor(Math.random() * 60 + 1);
+            var text = String(punishments[String(rand)]);
+            $("#punishment").text(text);
+            userName = getUser();
+            writeLog(text, userName);
+        });
+
+
+        function writeLog(punishment, user) {
+            firebase.database().ref().once('value').then(function (snapshot) {
+                console.log(snapshot);
+                console.log(snapshot.val().Log)
+                logArr = (snapshot.val().Log);
+                console.log(logArr);
+                var newEntry = {
+                    time: moment().format("DD/MM/YY hh:mm A"),
+                    punishment: punishment,
+                    user: user
+                }
+                logArr.push(newEntry);
+                database.ref().set({
+                    Log: logArr
+                });
+            });
+        }
+
+
+        $("#log-button").on("click", function (event) {
+            writeTable(logArr);
+        });
+
+        function getUser() {
+            var user = " ";
+            var textInput = $("#user-name").val();
+            if (textInput) {
+                user = textInput;
+            }
+            return user;
+        }
+
+
+        function writeTable(arr) {
+            $('#log-table').empty();
+
+            var table = $('<table>', { class: 'table table-dark' });
+            var head = $('<thead>');
+            var row = $('<tr>');
+            var cell1 = $('<th>', { scope: 'col' }).text('Time').appendTo(row);
+            var cell2 = $('<th>', { scope: 'col' }).text('Punishment').appendTo(row);
+            var cell3 = $('<th>', { scope: 'col' }).text('Submitted By').appendTo(row);
+            
+            row.appendTo(head);
+            head.appendTo(table);
+            table.appendTo('#log-table');
+
+            var body = $('<tbody>');
+
+            for (var i = arr.length -1; i >0; i--) {
+                var tableRow = $('<tr>').appendTo(body);
+                $('<th>', { scope: 'row' }).text(arr[i].time).appendTo(tableRow);
+                $('<td>').text(arr[i].punishment).appendTo(tableRow);
+                $('<td>').text(arr[i].user).appendTo(tableRow);
+            }
+            body.appendTo(table);
+        }
+
+    </script>
+
+
+    
+
+
+
+</body>
+
+</html>
