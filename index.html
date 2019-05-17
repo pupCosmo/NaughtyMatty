@@ -9,11 +9,10 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <title>Document</title>
+    <title>Naughty Matty</title>
 </head>
 
 <body>
-
     <div class="jumbotron">
         <h1 class="display-4">Matty was bad!</h1>
         <p class="lead">Click on the button for a random punisment!</p>
@@ -30,73 +29,89 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
 
     <script>
         var punishments = [
-            "When padded must not conceal diapers except in public",
-            "When padded must be leaking to change",
-            "Must whimper or cry audibly when using diapers",
-            "Must post photos of written diapers each change",
-            "Feed your padding a large helping of oatmeal front and back and go to bed with it",
-            "Must be doubled next change",
-            "Must be sucking on something (thumb/paci) at all feasible times",
-            "When padded must be messy to change",
-            "Must wear sissy attire except when in public",
-            "Ride horse cock for one hour - no clit touching",
-            "Must drink 20oz of liquid within an hour of bed; cannot leave bed for at least 6 hours for any reason",
-            "Wear nightdress to sleep.",
-            "When padded must wear clothing that teases diapered state (visible onesie, etc)",
-            "When padded can only change if it time/60 = int",
-            "Plugged for 24 hours - Big's choice",
-            "Roll once more, this is now permanent.",
-            "Getting neutered - banding with hair tie for 30 minutes",
-            "Must have visible diaper waistband peeking out pants at all times (including in public)",
-            "No touching clit until vaginal orgasm. 30 minutes every day until orgasm.",
-            "May only eat food from a bowl on the floor",
-            "Must sleep with hypnotic loop playing in background",
-            "Must watch 60 minutes of pre-school television or video",
-            "Must have Magnesium Citrate before bed",
-            "Must hump a plushie until you have climaxed three times, can't stop humping until you do.",
-            "Must receive verbal or written permission to change",
-            "Can only paw off once for 1 minute or twice for 30 seconds each day for 1 week",
-            "Must orgasm in diapers before changing into new one (lasts 2 days)",
-            "After messing yourself, mush the mess up against yourself or give yourself a wedgie before getting changed",
-            "Letters, write an embarassing message on each diaper you wear, take a pic to show it off.",
-            "Laxatives, every lunch time take a laxative",
-            "Limited changes you can only change once a day",
-            "Use suppositories",
-            "Drink a glass of water every 60 minutes for the whole day",
-            "Whilst at home you have to crawl, right until you get to the door (get kneepads if you wanna bitch about it)",
-            "Chat on chatroulette/omegal for 30 minutes with your diaper visible the entire time",
-            "Plugs, wear a toy in your butt during the night. If not busy the next day: flip a coin for vibrating (H no, T yes)",
-            "Mess and wet outside while lifting your leg on a tree as if you are marking your territory",
-            "Bark loudly whenever you wet or mess your diaper until you've barked 5 times",
-            "Watch my little ponies. not the new one the old one. and sing and clap along to the show",
-            "You aren't allowed to mess or wet in the house. That includes while you're asleep. (2 days)",
-            "Ask a bully cub for some new orders",
-            "Chastity for 2 weeks",
-            "Chastity for 1 week",
-            "Chastity for 3 days",
-            "Not allowed release until piggy pleases another m",
-            "Enema game - must hold for 10 minutes. If successful, use the potty and cum, if not lick mud",
-            "Dolcolax suppository and walk about the park until messed",
-            "Spanking (reps and implement to be decided by big)",
-            "Chilled banana suppository. Must eat out of diaper after.",
-            "Snout wallowing",
-            "Wear cute shiny skirt... in public.",
-            "Speech restriction - only allowed to vocalize in cries and whines.",
-            "Food restriction - meals for the next 12 hours restricted to baby food.",
-            "Drink restrictions - may only use baby bottle for 24h",
-            "Must beg to refill diaper pail",
-            "Must beg to refill diaper pail",
-            "Toy time - Two hours to knot Chase AND hilt Chance",
-            "Snack time with MM, resupply if necessary",
-            "Pronoun swap for 24 hours",
-            "Diaper nap time",
-            "Go to the park in a skirt, punishment giver's choice",
-            "Embarrass yourself online (telegram) with naughty pics"
+            "Attire - Go to the park in a skirt, punishment giver's choice",
+            "Attire - Must have diaper visibly peeking out at all times (including in public)",
+            "Attire - Must wear sissy attire except when in public",
+            "Attire - Refill your pail wearing clothing of punishment giver's choice",
+            "Attire - Wear cute shiny skirt... in public.",
+            "Attire - Wear nightdress to sleep.",
+            "Attire - Must not cover diapers except in public (no shorts/pants)",
+            "Attire - Must wear clothing that teases diapered state (visible onesie, etc)",
+            "Behavior Modification - Mess and wet outside while lifting your leg on a tree as if you are marking your territory",
+            "Behavior Modification - Must be sucking on something (thumb/paci) at all feasible times",
+            "Behavior Modification - Must crawl while at home, right until you get to the door (get kneepads if you wanna bitch about it)",
+            "Behavior Modification - Must sleep with hypnotic loop playing in background",
+            "Behavior Modification - Must watch 60 minutes of preschool television or video",
+            "Behavior Modification - Must whimper or cry audibly when using diapers",
+            "Behavior Modification - Oink loudly and repeatedly while you wet or mess your diaper",
+            "Behavior Modification - Only allowed to vocalize in cries and whines.",
+            "Behavior Modification - Pronoun swap for 24 hours",
+            "Behavior Modification - Replace \"I\" \"me\" etc with faggot when talking to others (when appropriate)",
+            "Behavior Modification - Watch my little ponies. not the new one the old one. and sing and clap along to the show",
+            "Behavior Modification - You aren't allowed to mess or wet in the house. That includes while you're asleep. (2 days)",
+            "Change Restriction - After messing yourself, mush the mess up against yourself or give yourself a wedgie before getting changed",
+            "Change Restriction - Limited changes you can only change once a day",
+            "Change Restriction - Must be doubled next change",
+            "Change Restriction - Must receive verbal or written permission to change",
+            "Change Restriction - Put a catheter in, must have permission to remove it",
+            "Change Restriction - Wait an hour after messing before changing",
+            "Change Restriction - Can only change if it time/60 = int",
+            "Change Restriction - Must be leaking to change",
+            "Change Restriction - Must be messy to change",
+            "Diaper Messing - Dolcolax suppository and walk about the park until messed",
+            "Diaper Messing - Feed your padding a large helping of oatmeal front and back and go to bed with it",
+            "Diaper Messing - Laxatives, every lunch time take a laxative (3 days)",
+            "Diaper Messing - Must have Magnesium Citrate before bed",
+            "Diaper Messing - Must hold Fleet Enema for 10 minutes. If successful make stickies, if not lick mud",
+            "Diaper Messing - Snout wallowing",
+            "Diaper Messing - Take bag enema before showering",
+            "Diaper Messing - Two chilled banana suppositories. Must eat out of diaper after.",
+            "Diaper Messing - Use suppositories (type and amount determined by punishment giver)",
+            "Diet Restriction - Drink a glass of water every 60 minutes for the whole day",
+            "Diet Restriction - May only eat food from a bowl on the floor",
+            "Diet Restriction - May only use baby bottle for 24h",
+            "Diet Restriction - Meals for the next 12 hours restricted to baby food.",
+            "Diet Restriction - Must drink 20oz of liquid within an hour of bed; cannot leave bed for at least 6 hours for any reason",
+            "Diet Restriction - Must eat off of a princess plate",
+            "Diet Restriction - Must use a soggy diaper as a plate. Flip a coin (H: food on backing, T: food on inside)",
+            "Diet Restriction - While at home no big boy cups, just sippy cups or bottles",
+            "Humiliation - Ask a bully cub for some new orders",
+            "Humiliation - Beg to be of service to a local Dom",
+            "Humiliation - Chat on chatroulette/omegal for 30 minutes with your diaper visible the entire time",
+            "Humiliation - Diaper nap time",
+            "Humiliation - Embarrass yourself online (telegram) with naughty pics",
+            "Humiliation - Must beg to refill diaper pail",
+            "Humiliation - Must beg to refill diaper pail",
+            "Humiliation - Must paint your toenails",
+            "Humiliation - Must post photos of written diapers each change",
+            "Humiliation - Snack time with MM, resupply if necessary",
+            "Humiliation - Talk to a Bull",
+            "Orgasm Control - Can only paw off once for 1 minute or twice for 30 seconds each day for 1 week",
+            "Orgasm Control - Chastity for 1 week",
+            "Orgasm Control - Chastity for 2 weeks",
+            "Orgasm Control - Chastity for 3 days",
+            "Orgasm Control - Have to sticky in a stinky diaper (mud thoroughly squished)",
+            "Orgasm Control - Must hump a plushie until you have climaxed three times, can't stop humping until you do.",
+            "Orgasm Control - Must orgasm in diapers before changing into new one (lasts 2 days)",
+            "Orgasm Control - Next time Mommy visits you're not allowed to fuck her (unless overruled, may not beg)",
+            "Orgasm Control - No touching clit until vaginal orgasm. 30 minutes every day until orgasm.",
+            "Orgasm Control - Not allowed release until piggy pleases another m",
+            "Pain - Spanking (reps and implement to be decided by big)",
+            "Punishment - Roll once more, duration to be determined by punishment giver.",
+            "Punishment - Roll TWO more punishments",
+            "Toy Time - Getting neutered (banding with hair tie for 30 minutes)",
+            "Toy Time - Have to eat out and clean up the blow up sheep",
+            "Toy Time - Plugged for 24 hours, Big's choice",
+            "Toy Time - Ride horse cock for one hour, no clit touching",
+            "Toy Time - Two hours to knot Chase AND hilt Chance",
+            "Toy Time - Wear a toy in your butt during the night. If not busy the next day: flip a coin for vibrating (H no, T yes)",
+            "Written Punishment - Draft a letter to MM",
+            "Written Punishment - Write \"I'm a worthless faggot.\" 30 times in crayon.",
+            "Written Punishment - Write an embarassing message on each diaper you wear, take a pic to show it off."
         ]
 
         $('#punishment').text(punishments.length + " punishments to choose from!");
@@ -120,7 +135,8 @@
             event.preventDefault();
             $("#punishment").empty();
             var rand = Math.floor(Math.random() * punishments.length);
-            var text = punishments[rand];
+            var temp = punishments[rand]
+            var text = temp.split(' - ')[1];
             $("#punishment").text(text);
             userName = getUser();
             writeLog(text, userName);
@@ -128,7 +144,6 @@
 
 
         function writeLog(punishment, user) {
-
             firebase.database().ref().once('value').then(function (snapshot) {
                 console.log(snapshot);
                 logArr = (snapshot.val().Log);
@@ -146,10 +161,10 @@
         }
 
 
-
         $("#log-button").on("click", function (event) {
             writeTable(logArr);
         });
+
 
         function getUser() {
             var user = " ";
@@ -192,11 +207,6 @@
         }
 
     </script>
-
-
-
-
-
 
 </body>
 
